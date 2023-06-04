@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'active_model_serializers', '~> 0.10.0'  # 追加
 gem 'devise_token_auth' # 追加
+gem "devise"
+gem "devise_token_auth"
+gem 'rack-cors'
 
 
 
@@ -40,6 +43,9 @@ group :development, :test do
   gem 'pry-rails' # 追加
   gem 'rubocop-rails' # 追加
   gem 'rubocop-rspec' # 追加
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'factory_bot_rails'
 end
 
 group :development do
