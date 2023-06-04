@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.1.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.1'
@@ -30,7 +30,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'active_model_serializers', '~> 0.10.0'  # 追加
 gem 'devise_token_auth' # 追加
 gem "devise"
-gem "devise_token_auth"
 gem 'rack-cors'
 
 
