@@ -1,2 +1,2 @@
---require rails_helper
+--require rspec_helper
 --format documentation
