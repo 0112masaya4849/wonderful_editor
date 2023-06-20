@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Article, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
-   context "title を指定しているとき" do
+  context "title を指定しているとき" do
     it "記事が作られる" do
       user = create(:user)  # テスト用のUserオブジェクトを作成する
       article = build(:article, user: user)  # userを関連付けたarticleオブジェクトを作成する
