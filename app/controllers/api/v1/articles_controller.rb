@@ -1,4 +1,4 @@
-class Api::V1::ArticlesController < ApplicationController
+class Api::V1::ArticlesController < Api::V1::BaseApiController
   before_action :set_article, only: %i[show update destroy]
 
   # GET /articles
@@ -18,23 +18,32 @@ class Api::V1::ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(article_params)
-
-    if @article.save
-      render json: @article, status: :created
-    else
-      render json: @article.errors, status: :unprocessable_entity
-    end
+    article = current_user.articles.create!(article_params)
+    render json: article, serializer: Api::V1::ArticleSerializer
   end
+
+  private
+
+    def article_params
+      params.require(:article).permit(:title, :body)
+    end
+
+  private
+
+  # def article_params
+  #   params.require(:article).permit(:title, :body)
+  # end
+
 
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    if @article.update(article_params)
-      render json: @article, status: :ok
-    else
-      render json: @article.errors, status: :unprocessable_entity
-    end
+    # 対象のレコードを探す
+    @article = Article.find(params[:id])
+    # 探してきたレコードに対して変更を行う
+    @article.update!(article_params)
+    # json として値を返す
+    render :show
   end
 
   # DELETE /articles/1
