@@ -22,13 +22,8 @@ class Api::V1::ArticlesController < Api::V1::BaseApiController
     render json: article, serializer: Api::V1::ArticleSerializer
   end
 
-  private
 
-    def article_params
-      params.require(:article).permit(:title, :body)
-    end
 
-  private
 
   # def article_params
   #   params.require(:article).permit(:title, :body)
@@ -37,19 +32,22 @@ class Api::V1::ArticlesController < Api::V1::BaseApiController
 
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
+
   def update
     # 対象のレコードを探す
     @article = Article.find(params[:id])
     # 探してきたレコードに対して変更を行う
     @article.update!(article_params)
     # json として値を返す
-    render :show
+    render json: @article
   end
 
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    @article.destroy
+    @article = Article.find(params[:id])
+    @article.destroy!
+    render json: @article
   end
 
   private
@@ -59,8 +57,11 @@ class Api::V1::ArticlesController < Api::V1::BaseApiController
       @article = Article.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+
     def article_params
-      params.require(:article).permit(:title, :body)
+        params.permit(:title, :body)
     end
+
+    # Only allow a list of trusted parameters through.
+
 end
