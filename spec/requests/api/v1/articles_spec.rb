@@ -40,11 +40,11 @@ RSpec.describe "Api::V1::Articles", type: :request do
     subject { post(api_v1_articles_path, params: params) }
 
     let(:params) { { article: attributes_for(:article) } }
-    let(:current_user) { create(:article) }
+    let(:current_user) { create(:user) }
 
     before { allow(controller).to receive(:current_user).and_return(current_user) }
 
-    it "記事のレコードが作成できる" do
+    fit "記事のレコードが作成できる" do
 
       expect { subject }.to change { Article.where(user_id: current_user.id).count }.by(1)
       res = JSON.parse(response.body)
