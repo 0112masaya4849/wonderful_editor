@@ -18,8 +18,9 @@ class Api::V1::ArticlesController < Api::V1::BaseApiController
   # POST /articles
   # POST /articles.json
   def create
+  binding.pry
     article = current_user.articles.create!(article_params)
-    render json: article, serializer: Api::V1::ArticleSerializer
+    render json: article, serializer: ArticleSerializer
   end
 
 
@@ -59,7 +60,7 @@ class Api::V1::ArticlesController < Api::V1::BaseApiController
 
 
     def article_params
-        params.permit(:title, :body)
+        params.require(:article).permit(:title, :body)
     end
 
     # Only allow a list of trusted parameters through.
